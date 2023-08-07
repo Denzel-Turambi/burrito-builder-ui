@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function OrderForm(props) {
   console.log('FORM PROPS', props)
@@ -34,7 +34,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        onClick={(e) => props.handleClick(e)}
+        onClick={(e) => setIngredients(e.target.name)}
       >
         {ingredient}
       </button>
@@ -48,7 +48,7 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        onChange={(e) => props.handleChange(e)}
+        onChange={(e) => setName(e.target.value)}
       />
 
       {ingredientButtons}
