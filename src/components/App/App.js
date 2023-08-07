@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getOrders } from "../../apiCalls";
+import { getOrders, postOrder } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 // import { postOrder } from "../../apiCalls";
@@ -14,34 +14,21 @@ function App() {
     .catch((err) => console.error("Error fetching:", err));
   }, []);
 
-  // function handleClick() {
-  //   console.log('handle click')
-  // }
 
-  // function handleChange() {
-  //   console.log('handle change')
-  // }
-
-  // function handleNewOrder(newOrder) {
-  //   setOrders((prevOrders) => [...prevOrders, newOrder]);
-  // }
-
-  // useEffect(() => {
-  //   if (orders.length === 0) return;
-  //   const latestOrder = orders[orders.length - 1];
-
-  //   postOrder(latestOrder)
-  //     .then((data) => {
-  //       console.log("POST request successful:", data);
-  //     })
-  //     .catch((err) => console.error("Error submitting order:", err));
-  // }, [orders]);
+  function addOrder(newOrder) {
+    postOrder(newOrder)
+    .then(res => {
+      console.log(res)
+      setOrders([...orders, res])
+    })
+    .catch(error => {console.error(error)})
+  }
 
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm />
+        <OrderForm addOrder={addOrder}/>
       </header>
 
       <Orders orders={orders} />

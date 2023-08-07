@@ -7,7 +7,19 @@ function OrderForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const newOrder = {
+      name: name,
+      ingredients: ingredients
+    }
+    props.addOrder(newOrder);
     clearInputs();
+  }
+
+  function addIngredient(event) {
+    event.preventDefault()
+    if (ingredients.filter(ingredient => ingredient === event.target.name).length < 2) {
+      setIngredients([...ingredients, event.target.name])
+    }
   }
 
   function clearInputs() {
@@ -34,7 +46,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        onClick={(e) => setIngredients(e.target.name)}
+        onClick={(e) => addIngredient(e)}
       >
         {ingredient}
       </button>
