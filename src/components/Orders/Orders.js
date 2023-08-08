@@ -6,10 +6,10 @@ const Orders = (props) => {
     return <p>No orders yet!</p>;
   }
   console.log('ORDER PROPS', props.orders)
-  const orderEls = props.orders.orders.map((order) => {
-    console.log('order', order)
+  const orderEls = props.orders.map((order) => {
+    // console.log('order', order)
     return (
-      <div className="order">
+      <div className="order" id={order.id} key={order.id}>
       <h3>{order.name}</h3>
       <ul className="ingredient-list">
         {order.ingredients.map((ingredient) => {

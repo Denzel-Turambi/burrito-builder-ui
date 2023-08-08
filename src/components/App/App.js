@@ -3,25 +3,32 @@ import "./App.css";
 import { getOrders, postOrder } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
-// import { postOrder } from "../../apiCalls";
+
 
 function App() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     getOrders()
-    .then(data => setOrders(data))
+    .then(data => {
+      console.log('fetch data', data.orders)
+      setOrders(data.orders)
+    })
     .catch((err) => console.error("Error fetching:", err));
   }, []);
 
 
   function addOrder(newOrder) {
+    // let ordersArray = orders.orders;
+    console.log('new order', newOrder)
     postOrder(newOrder)
-    .then(res => {
-      console.log(res)
-      setOrders([...orders, res])
+    .then(jsonResponse => {
+      console.log('jsonResponse', jsonResponse)
+      console.log(orders)
+      setOrders([...orders, jsonResponse])
     })
     .catch(error => {console.error(error)})
+    // .then(console.log(newOrder))
   }
 
   return (

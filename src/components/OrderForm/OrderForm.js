@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
+
 function OrderForm(props) {
-  console.log('FORM PROPS', props)
+  // console.log('FORM PROPS', props)
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
@@ -17,15 +18,19 @@ function OrderForm(props) {
 
   function addIngredient(event) {
     event.preventDefault()
-    if (ingredients.filter(ingredient => ingredient === event.target.name).length < 2) {
+    // if (ingredients.filter(ingredient => ingredient === event.target.name).length < 2) {
       setIngredients([...ingredients, event.target.name])
-    }
+    // }
   }
 
   function clearInputs() {
     setName("");
     setIngredients([]);
   };
+
+  function handleChange(e) {
+    setName(e.target.value)
+  }
 
   const possibleIngredients = [
     "beans",
@@ -60,7 +65,7 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => handleChange(e)}
       />
 
       {ingredientButtons}

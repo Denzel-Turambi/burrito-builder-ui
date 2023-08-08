@@ -3,17 +3,14 @@ export const getOrders = () => {
 };
 
 export const postOrder = (order) => {
+  console.log('post order', order)
   return fetch('http://localhost:3001/api/v1/orders', {
     method: 'POST',
-    body: JSON.stringify(order
-      // id: order.id,
-      // name: order.name,
-      // ingredients: order.ingredients
-    ),
     headers: {
-      "Content-type": "application.json"
-    }
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(order)
   })
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => console.log('data', data))
 }
